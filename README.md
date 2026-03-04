@@ -1,1 +1,1 @@
-** GigaChat **
+**GigaChat**

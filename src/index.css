@@ -2,6 +2,26 @@
 
 @import "tailwindcss";
 
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-msg-incoming-bg: var(--msg-incoming-bg); 
+  --color-msg-incoming-text: var(--msg-incoming-text);
+
+  --color-msg-outgoing-bg: var(--color-primary); 
+  --color-msg-outgoing-text: var(--msg-outgoing-text);
+
+  --color-chat-background: var(--chat-background);
+  --color-window-background: var(--window-background);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #000000; 
@@ -10,7 +30,7 @@
   --primary-foreground: #ffffff; 
   
   --secondary: #29e6a6;
-  --secondary-foreground: #000000;
+  --secondary-foreground: #838383;
 
   --msg-incoming-bg: #f3f4f6; 
   --msg-incoming-text: #000000;
@@ -20,31 +40,34 @@
 
   --chat-background: #E5E0E2;
   --window-background: #F7F8F7;
-
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-html, body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  min-width: 320px;
-  background-color: var(--background);
-  color: var(--foreground);
-}
-
-#root {
-  height: 100%;
-  width: 100%;
-  display: flex;
 }
 
 @layer base {
+  :root {
+    color-scheme: light dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html, body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    min-width: 320px;
+
+    @apply bg-background text-foreground; 
+  }
+
+  #root {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
   h1 {
     @apply text-2xl font-bold tracking-tight text-foreground;
   }

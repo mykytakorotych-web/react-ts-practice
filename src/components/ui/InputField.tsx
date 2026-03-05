@@ -6,7 +6,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   Icon: LucideIcon // Например, ваша иконка <Phone />
 }
 
-export function InputField({ labelText, Icon, placeholder, id, type }: Props) {
+export function InputField({
+  labelText,
+  Icon,
+  placeholder,
+  id,
+  type,
+  ...props
+}: Props) {
   return (
     <label
       htmlFor={id}
@@ -21,6 +28,7 @@ export function InputField({ labelText, Icon, placeholder, id, type }: Props) {
         id={id}
         placeholder={placeholder}
         className="flex-1 bg-transparent border-none outline-none text-foreground"
+        {...props}
       />
     </label>
   )

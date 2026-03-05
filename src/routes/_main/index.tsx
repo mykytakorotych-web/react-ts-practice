@@ -5,5 +5,11 @@ export const Route = createFileRoute("/_main/")({
 })
 
 function Index() {
-  return <h1>Giga Chat</h1>
+  return (
+    <div className="flex h-full w-full flex-col justify-center gap-4 items-center">
+      <span className="px-2 rounded-2xl bg-window-background">
+        Select a chat to start messaging
+      </span>
+    </div>
+  )
 }

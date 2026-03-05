@@ -1,17 +1,32 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router"
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router"
+import Cookie from "js-cookie"
+import { SideBar } from "../../components/sideBar/SideBar"
+import { useIsChatOpen } from "../../store/useIsChatOpen"
 
 export const Route = createFileRoute("/_main")({
+  beforeLoad: () => {
+    const token = Cookie.get("accessToken")
+
+    if (!token) {
+      throw redirect({
+        to: "/login",
+      })
+    }
+  },
   component: MainLayout,
 })
 
 function MainLayout() {
-  return (
-    <div className="flex h-screen w-full">
-      <aside className="w-80 border-r bg-window-background">
-        Список чатов...
-      </aside>
+  const { isOpen } = useIsChatOpen()
 
-      <main className="flex-1 bg-chat-background">
+  return (
+    <div className="relative flex h-screen w-full overflow-hidden sm:overflow-auto">
+      <SideBar />
+      <main
+        className={`absolute top-0 right-0 w-full h-full bg-chat-background transition-transform duration-300 sm:relative sm:flex-2 sm:translate-x-0 ${
+          isOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
         <Outlet />
       </main>
     </div>

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Закрываем системные или приватные пути от индексации в Google
+Disallow: /login
+Disallow: /register
+Disallow: /_auth/
+Disallow: /_main/

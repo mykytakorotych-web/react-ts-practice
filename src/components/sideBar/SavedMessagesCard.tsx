@@ -1,0 +1,27 @@
+import { Link } from "@tanstack/react-router"
+import { Bookmark } from "lucide-react"
+import { useIsChatOpen } from "../../store/useIsChatOpen"
+
+export function SavedMessagesCard({ userId }: { userId: number | undefined }) {
+  const { openChat } = useIsChatOpen()
+  return (
+    <Link
+      to="/$userId"
+      params={{ userId: `${userId}` }}
+      className="group flex items-center gap-3 p-2 rounded-xl hover:bg-chat-background transition-colors [&.active]:bg-primary cursor-pointer"
+      onClick={openChat}
+    >
+      <div className="w-12 h-12 rounded-full flex items-center justify-center bg-primary text-background shrink-0">
+        <Bookmark fill="var(--background)" />
+      </div>
+      <div>
+        <h3 className="font-medium group-[.active]:text-background">
+          Saved Messages
+        </h3>
+        <p className="group-[.active]:text-background text-secondary-foreground line-clamp-1 group">
+          Last message...
+        </p>
+      </div>
+    </Link>
+  )
+}

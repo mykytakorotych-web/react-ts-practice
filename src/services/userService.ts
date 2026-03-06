@@ -16,10 +16,15 @@ export const userService = {
     return data
   },
 
-  async getUserPostsRequest(userId: string) {
+  async getUserPostsRequest(userId: string): Promise<UserPostsResponse> {
     const { data } = await apiClient.get<UserPostsResponse>(
       `/posts/user/${userId}`,
     )
+    return data
+  },
+
+  async getUserByIdRequest(userId: string): Promise<User> {
+    const { data } = await apiClient.get<User>(`/users/${userId}`)
     return data
   },
 }

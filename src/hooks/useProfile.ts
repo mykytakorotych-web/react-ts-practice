@@ -9,6 +9,8 @@ export const useProfile = () => {
     queryFn: userService.getMeRequest,
     enabled: !!Cookies.get("accessToken"),
     retry: false,
+    staleTime: 1000 * 60 * 60,
+    gcTime: 1000 * 60 * 60,
   })
 
   return {

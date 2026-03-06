@@ -38,7 +38,9 @@ function LoginComponent() {
         required
       />
 
-      <span className="text-red-500 h-5 truncate">{error?.message}</span>
+      <span className="text-red-500 h-5 truncate">
+        {error && `Email or password is incorrect`}
+      </span>
 
       <div className="flex justify-between items-center mt-2">
         <Link to="." className="text-secondary-foreground">

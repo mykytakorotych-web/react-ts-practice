@@ -23,7 +23,7 @@ function MainLayout() {
     <div className="relative flex h-screen w-full overflow-hidden sm:overflow-auto">
       <SideBar />
       <main
-        className={`absolute top-0 right-0 w-full h-full bg-chat-background transition-transform duration-300 sm:relative sm:flex-2 sm:translate-x-0 ${
+        className={`absolute top-0 right-0 w-full h-full bg-chat-background flex flex-col transition-transform duration-300 sm:relative sm:flex-1 sm:translate-x-0 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

@@ -17,7 +17,7 @@ export function SideBar() {
   const isLoading = isLoadingUsers || isProfileLoading
 
   return (
-    <aside className="relative w-full sm:max-w-xs bg-window-background flex flex-col py-4 border-r-2 border-secondary-foreground/20 ">
+    <aside className="relative w-full sm:max-w-xs bg-window-background flex flex-col pt-4 border-r-2 border-secondary-foreground/20">
       <SideBarTopSection />
       <div className="flex-1 overflow-y-auto p-4 space-y-1.5">
         <SavedMessagesCard userId={currentUser?.id} />

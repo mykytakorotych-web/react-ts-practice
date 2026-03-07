@@ -11,9 +11,9 @@ export function ChatName({ userProfile }: { userProfile: User | undefined }) {
         />
       )}
       <div>
-        <h1 className="font-medium leading-tight">
+        <span className="font-medium leading-tight">
           {userProfile?.firstName} {userProfile?.lastName}
-        </h1>
+        </span>
         <p className="text-xs text-gray-500">@{userProfile?.username}</p>
       </div>
     </div>

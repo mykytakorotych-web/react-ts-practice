@@ -2,18 +2,30 @@ import type { UserPostsResponse } from "../../types/posts.types"
 
 interface ChatMessagesProps {
   postsData: UserPostsResponse | undefined
-  isCurrentUser: boolean
+  currentUserId: number | undefined
 }
 
-export function ChatMessages({ postsData, isCurrentUser }: ChatMessagesProps) {
-  return postsData?.posts.map(post => (
-    <div
-      key={post.id}
-      className={`mb-4 py-4 px-6 rounded-2xl shadow-sm h-fit w-10/12 ${isCurrentUser ? "bg-primary rounded-br-sm flex self-end" : " bg-window-background rounded-bl-sm"}`}
-    >
-      <p className={`${isCurrentUser ? "text-background" : "text-foreground"}`}>
-        {post.body}
-      </p>
-    </div>
-  ))
+export function ChatMessages({ postsData, currentUserId }: ChatMessagesProps) {
+  return postsData?.posts.map(post => {
+    const isMyMessage = post.userId === currentUserId
+
+    return (
+      <div
+        key={post.id}
+        className={`py-3 px-5 rounded-2xl shadow-sm h-fit max-w-[85%] wrap-break-word ${
+          isMyMessage
+            ? "bg-primary rounded-br-sm self-end"
+            : "bg-window-background rounded-bl-sm self-start"
+        }`}
+      >
+        <p
+          className={`whitespace-pre-wrap sm:wrap-break-word ${
+            isMyMessage ? "text-background" : "text-foreground"
+          }`}
+        >
+          {post.body}
+        </p>
+      </div>
+    )
+  })
 }

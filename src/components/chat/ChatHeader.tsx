@@ -1,7 +1,8 @@
 import { ChevronLeft } from "lucide-react"
 import type { User } from "../../types/user.types"
 import { Skeleton } from "../ui/Skeleton"
-import { ChatName } from "./chatName"
+
+import { ChatName } from "./ChatName"
 import { ChatSavedMessages } from "./ChatSavedMessages"
 
 interface ChatHeaderProps {

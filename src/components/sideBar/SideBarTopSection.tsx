@@ -1,20 +1,28 @@
-import { Menu } from "lucide-react"
+import { ChevronLeft, Menu } from "lucide-react"
 
-import { Activity, useState } from "react"
+import { Activity } from "react"
+import { useSideBarTopSection } from "../../hooks/useSideBarTopSection"
 import { DropDownMenu } from "../dropDownMenu/DropDownMenu"
 import { SearchInput } from "../ui/SearchInput"
+import { TopSectionButton } from "./TopSectionButton"
 
 export function SideBarTopSection() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { isMenuOpen, searchQuery, setIsMenuOpen, setSearchQuery } =
+    useSideBarTopSection()
 
   return (
     <div className="flex gap-2 border-b-2 border-secondary-foreground/20 px-4 pb-4">
-      <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="p-2 text-secondary-foreground hover:bg-chat-background rounded-full duration-300 focus:outline-none"
-      >
-        <Menu className="w-6 h-6" />
-      </button>
+      {!searchQuery ? (
+        <TopSectionButton
+          Icon={Menu}
+          setSearchQuery={() => setIsMenuOpen(!isMenuOpen)}
+        />
+      ) : (
+        <TopSectionButton
+          Icon={ChevronLeft}
+          setSearchQuery={() => setSearchQuery("")}
+        />
+      )}
 
       <SearchInput />
 

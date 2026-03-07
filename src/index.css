@@ -97,46 +97,28 @@
   }
 }
 
-/* =========================================
-   Стили для Firefox
-   ========================================= */
 * {
-  /* Делает скроллбар тонким (как в ТГ) */
   scrollbar-width: thin;
-  /* Цвет ползунка и цвет дорожки (прозрачный) */
   scrollbar-color: var(--secondary-foreground) transparent;
 }
 
-/* =========================================
-   Стили для WebKit (Chrome, Safari, Edge)
-   ========================================= */
-
-/* Общая ширина и высота (для горизонтального) скроллбара */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
-/* Дорожка, по которой ездит ползунок */
 ::-webkit-scrollbar-track {
-  background: transparent; /* В ТГ она невидимая */
-  /* Если захочешь сделать ее видимой, раскомментируй строку ниже: */
-  /* background: var(--chat-background); */
+  background: transparent;
 }
 
-/* Сам ползунок */
 ::-webkit-scrollbar-thumb {
   background-color: var(--secondary-foreground);
-  border-radius: 10px; /* Скругленные края */
+  border-radius: 10px;
   
-  /* Добавляем прозрачную рамку, чтобы ползунок казался еще тоньше, 
-     но область захвата мышью оставалась удобной */
   border: 2px solid transparent; 
   background-clip: padding-box;
 }
 
-/* Ползунок при наведении мыши */
 ::-webkit-scrollbar-thumb:hover {
-  /* При наведении подсвечиваем твоим главным синим цветом */
   background-color: var(--primary); 
 }

@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router"
 import { Bookmark } from "lucide-react"
-import { useIsChatOpen } from "../../store/useIsChatOpen"
+import { useIsChatOpenStore } from "../../store/useIsChatOpenStore"
 
 export function SavedMessagesCard({ userId }: { userId: number | undefined }) {
-  const { openChat } = useIsChatOpen()
+  const { openChat } = useIsChatOpenStore()
   return (
     <Link
       to="/$userId"
@@ -19,7 +19,7 @@ export function SavedMessagesCard({ userId }: { userId: number | undefined }) {
           Saved Messages
         </h3>
         <p className="group-[.active]:text-background text-secondary-foreground line-clamp-1 group">
-          Last message...
+          Chat with yourself
         </p>
       </div>
     </Link>

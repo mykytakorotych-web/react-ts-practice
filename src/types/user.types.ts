@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
   id: number
   username: string
   email: string
@@ -10,8 +10,8 @@ export interface User {
   image: string
 }
 
-export interface AllUsersResponse {
-  users: User[]
+export interface IAllUsersResponse {
+  users: IUser[]
   total: number
   skip: number
   limit: number

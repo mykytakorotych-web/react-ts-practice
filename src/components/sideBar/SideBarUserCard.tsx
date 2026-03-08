@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router"
 import { useIsChatOpenStore } from "../../store/useIsChatOpenStore"
-import type { User } from "../../types/user.types"
+import type { IUser } from "../../types/user.types"
 
-export function SideBarUserCard({ user }: { user: User }) {
+export function SideBarUserCard({ user }: { user: IUser }) {
   const { openChat } = useIsChatOpenStore()
 
   return (

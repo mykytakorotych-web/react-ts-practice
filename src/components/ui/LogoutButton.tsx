@@ -1,16 +1,9 @@
-import { DoorOpenIcon } from "lucide-react"
+import { DoorOpen } from "lucide-react"
 import { useAuth } from "../../hooks/useAuth"
+import { SettingsRow } from "./SettingsRow"
 
 export function LogoutButton() {
   const { logout } = useAuth()
 
-  return (
-    <button
-      onClick={logout}
-      className="flex items-center gap-2 bg-chat-background"
-    >
-      <DoorOpenIcon />
-      <span>Log Out</span>
-    </button>
-  )
+  return <SettingsRow Icon={DoorOpen} title="Log Out" onClick={logout} />
 }

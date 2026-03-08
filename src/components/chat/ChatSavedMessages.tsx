@@ -1,10 +1,10 @@
 import { Bookmark } from "lucide-react"
-import type { User } from "../../types/user.types"
+import type { IUser } from "../../types/user.types"
 
 export function ChatSavedMessages({
   userProfile,
 }: {
-  userProfile: User | undefined
+  userProfile: IUser | undefined
 }) {
   return (
     <div className="group flex items-center gap-3 p-2 rounded-xl hover:bg-chat-background transition-colors [&.active]:bg-primary cursor-pointer">

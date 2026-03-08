@@ -19,6 +19,7 @@ function LoginComponent() {
         type="text"
         id="username"
         name="username"
+        autoComplete="username"
         maxLength={40}
         minLength={5}
         disabled={isPending}
@@ -32,6 +33,7 @@ function LoginComponent() {
         type="password"
         id="password"
         name="password"
+        autoComplete="current-password"
         maxLength={40}
         minLength={5}
         disabled={isPending}
@@ -48,7 +50,7 @@ function LoginComponent() {
         </Link>
         <button
           type="submit"
-          className="bg-primary text-white font-medium text-base px-8 py-2.5 rounded-lg shadow-lg shadow-primary/40 hover:bg-primary/90 hover:shadow-primary/50 transition-all active:scale-95"
+          className="bg-primary text-white font-medium text-base px-8 py-2.5 rounded-lg shadow-lg shadow-primary/40 hover:bg-primary/90 hover:shadow-primary/50 transition-colors active:scale-95"
           disabled={isPending}
         >
           {isPending ? "Logging in..." : "Log in"}

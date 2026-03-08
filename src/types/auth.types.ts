@@ -1,6 +1,6 @@
-import type { User } from "./user.types"
+import type { IUser } from "./user.types"
 
-export interface Tokens {
+export interface ITokens {
   accessToken: string
   refreshToken: string
 }
@@ -10,4 +10,4 @@ export interface LoginData {
   password: string
 }
 
-export interface LoginUser extends User, Tokens {}
+export interface ILoginUser extends IUser, ITokens {}

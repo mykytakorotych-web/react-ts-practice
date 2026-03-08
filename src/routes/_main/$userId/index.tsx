@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { ChatFooter } from "../../../components/chat/ChatFooter"
 import { ChatHeader } from "../../../components/chat/ChatHeader"
 import { ChatMessages } from "../../../components/chat/ChatMessages"
@@ -21,25 +21,20 @@ function ChatComponent() {
     isLoading,
     isUserLoading,
     messagesEndRef,
+    sendMessage,
     closeChat,
-    handleSend,
-    openChat,
   } = useUserChat(userId)
 
   const [message, setMessage] = useState("")
 
-  useEffect(() => {
-    openChat()
-  }, [openChat])
-
   const handleMessageSend = () => {
     if (!message.trim()) return
-    handleSend(message.trim())
+    sendMessage(message)
     setMessage("")
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
       handleMessageSend()
     }
@@ -57,12 +52,12 @@ function ChatComponent() {
       <div className="flex-1 p-4 overflow-y-auto flex flex-col">
         {isLoading ? (
           <Loader />
-        ) : postsData?.total === 0 ? (
+        ) : postsData?.posts?.length === 0 ? (
           <div className="flex h-full w-full flex-col justify-center gap-4 items-center">
             <div className="p-4 rounded-2xl bg-window-background text-center">
               <h4>No messages here yet...</h4>
               <p className="mb-2">Send a message.</p>
-              <Sticker name="hi" />
+              <Sticker name="hi" fetchPriority="high" />
             </div>
           </div>
         ) : (

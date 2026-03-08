@@ -1,42 +1,44 @@
 import { apiClient } from "../api/client"
-import type { Post, UserPostsResponse } from "../types/posts.types"
-import type { RequestParams } from "../types/request.type"
-import type { AllUsersResponse, User } from "../types/user.types"
+import type { IPost, IUserPostsResponse } from "../types/posts.types"
+import type { IRequestParams } from "../types/request.type"
+import type { IAllUsersResponse, IUser } from "../types/user.types"
 
 export const userService = {
-  async getMeRequest(): Promise<User> {
-    const { data } = await apiClient.get<User>("/user/me")
+  async getMeRequest(): Promise<IUser> {
+    const { data } = await apiClient.get<IUser>("/user/me")
     return data
   },
 
-  async getAllUsersRequest(params?: RequestParams): Promise<AllUsersResponse> {
-    const { data } = await apiClient.get<AllUsersResponse>("/users", {
+  async getAllUsersRequest(
+    params?: IRequestParams,
+  ): Promise<IAllUsersResponse> {
+    const { data } = await apiClient.get<IAllUsersResponse>("/users", {
       params,
     })
     return data
   },
 
-  async getUserPostsRequest(userId: string): Promise<UserPostsResponse> {
-    const { data } = await apiClient.get<UserPostsResponse>(
+  async getUserPostsRequest(userId: string): Promise<IUserPostsResponse> {
+    const { data } = await apiClient.get<IUserPostsResponse>(
       `/posts/user/${userId}`,
     )
     return data
   },
 
-  async getUserByIdRequest(userId: string): Promise<User> {
-    const { data } = await apiClient.get<User>(`/users/${userId}`)
+  async getUserByIdRequest(userId: string): Promise<IUser> {
+    const { data } = await apiClient.get<IUser>(`/users/${userId}`)
     return data
   },
 
-  async searchUsersRequest(query: string): Promise<AllUsersResponse> {
-    const { data } = await apiClient.get<AllUsersResponse>("/users/search", {
+  async searchUsersRequest(query: string): Promise<IAllUsersResponse> {
+    const { data } = await apiClient.get<IAllUsersResponse>("/users/search", {
       params: { limit: 10, q: query },
     })
     return data
   },
 
-  async addPostRequest(userId: number, content: string): Promise<Post> {
-    const { data } = await apiClient.post<Post>("/posts/add", {
+  async addPostRequest(userId: number, content: string): Promise<IPost> {
+    const { data } = await apiClient.post<IPost>("/posts/add", {
       userId,
       body: content,
     })

@@ -1,1 +1,1 @@
-export type StickersList = "hi" | "i-dont-know"
+export type TStickersList = "hi" | "i-dont-know"

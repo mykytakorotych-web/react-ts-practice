@@ -1,8 +1,8 @@
 import { apiClient } from "../api/client"
-import type { LoginData, LoginUser } from "../types/auth.types"
+import type { ILoginUser, LoginData } from "../types/auth.types"
 
 export const authService = {
-  async login(loginData: LoginData): Promise<LoginUser> {
+  async login(loginData: LoginData): Promise<ILoginUser> {
     const { data } = await apiClient.post("/auth/login", {
       username: loginData.username,
       password: loginData.password,

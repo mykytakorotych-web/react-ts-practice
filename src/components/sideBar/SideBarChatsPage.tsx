@@ -1,12 +1,12 @@
-import type { AllUsersResponse, User } from "../../types/user.types"
+import type { IAllUsersResponse, IUser } from "../../types/user.types"
 import { Skeleton } from "../ui/Skeleton"
 import { SavedMessagesCard } from "./SavedMessagesCard"
 import { SideBarUserCard } from "./SideBarUserCard"
 
 interface SideBarChatsPageProps {
-  data: AllUsersResponse | undefined
+  data: IAllUsersResponse | undefined
   isLoading: boolean
-  currentUser: User | undefined
+  currentUser: IUser | undefined
 }
 
 export function SideBarChatsPage({

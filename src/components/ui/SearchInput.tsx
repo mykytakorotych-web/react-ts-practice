@@ -16,7 +16,8 @@ export function SearchInput() {
         onChange={e => setQuery(e.target.value)}
         value={query}
         maxLength={35}
-        className="w-full bg-chat-background text-foreground rounded-full py-2 pl-10 pr-4 outline-none transition-all focus:bg-white focus:ring-2 focus:ring-primary"
+        className="w-full bg-chat-background text-foreground rounded-full py-2 pl-10 pr-4 outline-none transition-colors focus:bg-white focus:ring-2 focus:ring-primary"
+        autoComplete="off"
       />
     </div>
   )

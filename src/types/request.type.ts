@@ -1,4 +1,4 @@
-export interface RequestParams {
+export interface IRequestParams {
   limit?: number
   skip?: number
 }

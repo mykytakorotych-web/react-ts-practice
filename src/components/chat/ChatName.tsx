@@ -1,6 +1,6 @@
-import type { User } from "../../types/user.types"
+import type { IUser } from "../../types/user.types"
 
-export function ChatName({ userProfile }: { userProfile: User | undefined }) {
+export function ChatName({ userProfile }: { userProfile: IUser | undefined }) {
   return (
     <div className="flex items-center gap-3">
       {userProfile?.image && (

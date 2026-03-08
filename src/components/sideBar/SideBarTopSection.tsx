@@ -7,20 +7,24 @@ import { SearchInput } from "../ui/SearchInput"
 import { TopSectionButton } from "./TopSectionButton"
 
 export function SideBarTopSection() {
-  const { isMenuOpen, searchQuery, setIsMenuOpen, setSearchQuery } =
+  const { isMenuOpen, setIsMenuOpen, activePage, handleBackButton } =
     useSideBarTopSection()
 
   return (
     <div className="flex gap-2 border-b-2 border-secondary-foreground/20 px-4 pb-4">
-      {!searchQuery ? (
+      {activePage === "chats" ? (
         <TopSectionButton
+          id="sidebar-menu-toggle"
+          aria-label="Open main menu"
           Icon={Menu}
           setSearchQuery={() => setIsMenuOpen(!isMenuOpen)}
         />
       ) : (
         <TopSectionButton
+          id="search-back-button"
+          aria-label="Go back to chats"
           Icon={ChevronLeft}
-          setSearchQuery={() => setSearchQuery("")}
+          setSearchQuery={() => handleBackButton()}
         />
       )}
 

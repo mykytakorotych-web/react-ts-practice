@@ -9,24 +9,26 @@ export function SideBarSearchPage() {
 
   return (
     <>
-      {isLoading ? (
-        <Skeleton count={5} height="66px" className="rounded-xl" />
-      ) : data?.total && data?.total > 0 ? (
-        data?.users.map(user => {
-          if (user.id !== currentUser?.id) {
-            return <SideBarUserCard key={user.id} user={user} />
-          } else {
-            return <SavedMessagesCard userId={currentUser?.id} />
-          }
-        })
-      ) : (
-        <div className="text-center text-secondary-foreground mt-10">
-          <Sticker name="i-dont-know" />
-          <p className="truncate max-w-xs">
-            No results found for "{searchQuery}"
-          </p>
-        </div>
-      )}
+      <div className="flex-1 overflow-y-auto p-4 space-y-1.5">
+        {isLoading ? (
+          <Skeleton count={5} height="66px" className="rounded-xl" />
+        ) : data?.total && data?.total > 0 ? (
+          data?.users.map(user => {
+            if (user.id !== currentUser?.id) {
+              return <SideBarUserCard key={user.id} user={user} />
+            } else {
+              return <SavedMessagesCard userId={currentUser?.id} />
+            }
+          })
+        ) : (
+          <div className="text-center text-secondary-foreground mt-10">
+            <Sticker name="i-dont-know" fetchPriority="high" />
+            <p className="truncate max-w-xs">
+              No results found for "{searchQuery}"
+            </p>
+          </div>
+        )}
+      </div>
     </>
   )
 }

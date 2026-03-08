@@ -1,7 +1,7 @@
-import type { UserPostsResponse } from "../../types/posts.types"
+import type { IUserPostsResponse } from "../../types/posts.types"
 
 interface ChatMessagesProps {
-  postsData: UserPostsResponse | undefined
+  postsData: IUserPostsResponse | undefined
   currentUserId: number | undefined
 }
 

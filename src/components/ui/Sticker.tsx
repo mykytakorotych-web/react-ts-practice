@@ -1,12 +1,20 @@
-import type { StickersList } from "../../types/sticker.types"
+import type { ImgHTMLAttributes } from "react"
+import type { TStickersList } from "../../types/sticker.types"
 
-export function Sticker({ name }: { name: StickersList }) {
+interface StickerProps extends ImgHTMLAttributes<HTMLImageElement> {
+  name: TStickersList
+}
+
+export function Sticker({ name, ...props }: StickerProps) {
   return (
     <div className="flex justify-center">
       <img
-        className="max-w-50"
-        src={`/stickers/${name}.png`}
-        alt="I don't know Sticker"
+        className="w-50"
+        width={200}
+        height={200}
+        src={`/stickers/${name}.webp`}
+        alt={`${name} Sticker`}
+        {...props}
       />
     </div>
   )

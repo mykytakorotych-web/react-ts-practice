@@ -3,12 +3,16 @@ import { useCallback, useEffect, useRef } from "react"
 
 import { userService } from "../services/userService"
 import { useIsChatOpenStore } from "../store/useIsChatOpenStore"
-import { useProfile } from "./useProfile"
-// Импортируем наш новый хук
 import { useChatWebSocket } from "./useChatWebSocket"
+import { useProfile } from "./useProfile"
 
 export const useUserChat = (userId: string) => {
   const { openChat, closeChat } = useIsChatOpenStore()
+
+  useEffect(() => {
+    openChat()
+    return () => closeChat()
+  }, [openChat, closeChat])
 
   const { data: postsData, isLoading: isPostsLoading } = useQuery({
     queryKey: ["userPosts", userId],
@@ -23,7 +27,7 @@ export const useUserChat = (userId: string) => {
 
   const { user: currentUser, isLoading: isCurrentUserLoading } = useProfile()
 
-  const isLoading = isPostsLoading || isCurrentUserLoading
+  const { sendMessage, isReady } = useChatWebSocket(userId, currentUser?.id)
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -32,29 +36,25 @@ export const useUserChat = (userId: string) => {
   }, [])
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      scrollToBottom()
-    }, 300)
+    if (postsData?.posts?.length) {
+      const timeoutId = setTimeout(scrollToBottom, 0)
+      return () => clearTimeout(timeoutId)
+    }
+  }, [postsData?.posts?.length, scrollToBottom])
 
-    return () => clearTimeout(timeoutId)
-  }, [postsData, scrollToBottom])
-
-  const { sendMessage } = useChatWebSocket(
-    userId,
-    currentUser?.id,
-    scrollToBottom,
-  )
+  const isLoading = isPostsLoading || isCurrentUserLoading
+  const isCurrentUser = currentUser ? currentUser.id === Number(userId) : false
 
   return {
     postsData,
     userProfile,
     currentUser,
-    isCurrentUser: currentUser && currentUser?.id === +userId,
+    isCurrentUser,
     isLoading,
     isUserLoading,
     messagesEndRef,
+    isReady,
+    sendMessage,
     closeChat,
-    handleSend: sendMessage,
-    openChat,
   }
 }

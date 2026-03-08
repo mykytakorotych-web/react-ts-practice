@@ -1,13 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useNavigate } from "@tanstack/react-router"
 import Cookies from "js-cookie"
+import type { SubmitEvent } from "react"
 import { authService } from "../services/authService"
 
 export const useAuth = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
 

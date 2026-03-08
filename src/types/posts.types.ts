@@ -1,19 +1,19 @@
-export interface Post {
+export interface IPost {
   id: number
-  title: string
+  title?: string
   body: string
-  tags: string[]
-  reactions: {
+  tags?: string[]
+  reactions?: {
     likes: number
     dislikes: number
   }
-  views: number
-  userId: number
+  views?: number
+  userId?: number
 }
 
-export interface UserPostsResponse {
-  posts: Post[]
+export interface IUserPostsResponse {
+  posts: IPost[]
   total: number
-  skip: number
-  limit: number
+  skip?: number
+  limit?: number
 }

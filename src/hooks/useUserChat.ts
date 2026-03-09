@@ -37,7 +37,7 @@ export const useUserChat = (userId: string) => {
 
   useEffect(() => {
     if (postsData?.posts?.length) {
-      const timeoutId = setTimeout(scrollToBottom, 0)
+      const timeoutId = setTimeout(scrollToBottom, 200)
       return () => clearTimeout(timeoutId)
     }
   }, [postsData?.posts?.length, scrollToBottom])

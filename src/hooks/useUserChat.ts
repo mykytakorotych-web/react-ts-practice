@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef } from "react"
 
 import { userService } from "../services/userService"
 import { useIsChatOpenStore } from "../store/useIsChatOpenStore"
+import { checkIs404 } from "../utils/checkIs404"
 import { useChatWebSocket } from "./useChatWebSocket"
 import { useProfile } from "./useProfile"
 
@@ -17,13 +18,21 @@ export const useUserChat = (userId: string) => {
     return () => closeChat()
   }, [openChat, closeChat])
 
-  const { data: postsData, isLoading: isPostsLoading } = useQuery({
+  const {
+    data: postsData,
+    isLoading: isPostsLoading,
+    error: postsError,
+  } = useQuery({
     queryKey: ["userPosts", userId],
     queryFn: () => userService.getUserPostsRequest(userId),
     staleTime: Infinity,
   })
 
-  const { data: userProfile, isLoading: isUserLoading } = useQuery({
+  const {
+    data: userProfile,
+    isLoading: isUserLoading,
+    error: userError,
+  } = useQuery({
     queryKey: ["user", userId],
     queryFn: () => userService.getUserByIdRequest(userId),
   })
@@ -42,6 +51,11 @@ export const useUserChat = (userId: string) => {
   const isLoading = isPostsLoading || isCurrentUserLoading
   const isCurrentUser = currentUser ? currentUser.id === Number(userId) : false
 
+  const isNotFound = checkIs404(postsError) || checkIs404(userError)
+  const criticalError =
+    (!checkIs404(postsError) && postsError) ||
+    (!checkIs404(userError) && userError)
+
   return {
     postsData,
     userProfile,
@@ -50,6 +64,8 @@ export const useUserChat = (userId: string) => {
     isLoading,
     isUserLoading,
     messagesEndRef,
+    isNotFound,
+    criticalError,
     sendMessage,
     closeChat,
   }

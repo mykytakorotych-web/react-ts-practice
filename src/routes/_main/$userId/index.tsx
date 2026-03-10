@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, notFound } from "@tanstack/react-router"
 import { ChatFooter } from "../../../components/chat/ChatFooter"
 import { ChatHeader } from "../../../components/chat/ChatHeader"
 import { ChatMessages } from "../../../components/chat/ChatMessages"
@@ -20,9 +20,18 @@ function ChatComponent() {
     isLoading,
     isUserLoading,
     messagesEndRef,
+    isNotFound,
+    criticalError,
     sendMessage,
     closeChat,
   } = useUserChat(userId)
+
+  if (isNotFound) {
+    throw notFound()
+  }
+  if (criticalError) {
+    throw criticalError
+  }
 
   return (
     <div className="flex flex-col h-full w-full relative bg-chat-background">

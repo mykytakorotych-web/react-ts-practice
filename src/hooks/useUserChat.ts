@@ -8,6 +8,9 @@ import { useProfile } from "./useProfile"
 
 export const useUserChat = (userId: string) => {
   const { openChat, closeChat } = useIsChatOpenStore()
+  const { user: currentUser, isLoading: isCurrentUserLoading } = useProfile()
+  const { sendMessage } = useChatWebSocket(userId, currentUser?.id)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     openChat()
@@ -24,12 +27,6 @@ export const useUserChat = (userId: string) => {
     queryKey: ["user", userId],
     queryFn: () => userService.getUserByIdRequest(userId),
   })
-
-  const { user: currentUser, isLoading: isCurrentUserLoading } = useProfile()
-
-  const { sendMessage, isReady } = useChatWebSocket(userId, currentUser?.id)
-
-  const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "instant" })
@@ -53,7 +50,6 @@ export const useUserChat = (userId: string) => {
     isLoading,
     isUserLoading,
     messagesEndRef,
-    isReady,
     sendMessage,
     closeChat,
   }

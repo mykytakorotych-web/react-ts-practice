@@ -8,22 +8,23 @@ export const useAuth = () => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
 
-  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: SubmitEvent<HTMLFormElement>,
+    type: "login" | "register",
+  ) => {
     e.preventDefault()
-    const formData = new FormData(e.currentTarget)
 
-    try {
-      if (formData !== null && formData.get("password") !== null) {
-        loginMutation.mutate({
-          username: formData.get("username")?.toString() || "",
-          password: formData.get("password")?.toString() || "",
-        })
-        navigate({ to: "/" })
-      } else {
-        throw new Error("Username and password are required")
-      }
-    } catch (err) {
-      console.error("Failed to login", err)
+    const formData = new FormData(e.currentTarget)
+    const username = formData.get("username")?.toString().trim()
+    const password = formData.get("password")?.toString().trim()
+
+    if (!username || !password) {
+      console.warn("Username and password are required")
+      return
+    }
+
+    if (type === "login" || type === "register") {
+      loginMutation.mutate({ username, password })
     }
   }
 

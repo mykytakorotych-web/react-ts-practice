@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { useState } from "react"
 import { ChatFooter } from "../../../components/chat/ChatFooter"
 import { ChatHeader } from "../../../components/chat/ChatHeader"
 import { ChatMessages } from "../../../components/chat/ChatMessages"
@@ -24,21 +23,6 @@ function ChatComponent() {
     sendMessage,
     closeChat,
   } = useUserChat(userId)
-
-  const [message, setMessage] = useState("")
-
-  const handleMessageSend = () => {
-    if (!message.trim()) return
-    sendMessage(message)
-    setMessage("")
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleMessageSend()
-    }
-  }
 
   return (
     <div className="flex flex-col h-full w-full relative bg-chat-background">
@@ -71,12 +55,7 @@ function ChatComponent() {
         )}
       </div>
 
-      <ChatFooter
-        message={message}
-        handleKeyDown={handleKeyDown}
-        handleMessageSend={handleMessageSend}
-        setMessage={setMessage}
-      />
+      <ChatFooter onSend={sendMessage} />
     </div>
   )
 }

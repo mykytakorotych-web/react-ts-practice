@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react"
 import type { InputHTMLAttributes } from "react"
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   labelText: string
   Icon: LucideIcon // Например, ваша иконка <Phone />
 }
@@ -13,7 +13,7 @@ export function InputField({
   id,
   type,
   ...props
-}: Props) {
+}: InputFieldProps) {
   return (
     <label
       htmlFor={id}

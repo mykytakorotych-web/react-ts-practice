@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import type { IPost, IUserPostsResponse } from "../types/posts.types"
 
 export const useChatWebSocket = (
@@ -8,8 +8,6 @@ export const useChatWebSocket = (
 ) => {
   const queryClient = useQueryClient()
   const wsRef = useRef<WebSocket | null>(null)
-
-  const [isReady, setIsReady] = useState(false)
 
   const addMessageToCache = useCallback(
     (newMessage: IPost) => {
@@ -33,9 +31,6 @@ export const useChatWebSocket = (
     const ws = new WebSocket("wss://ws.postman-echo.com/raw")
     wsRef.current = ws
 
-    ws.onopen = () => setIsReady(true)
-    ws.onclose = () => setIsReady(false)
-
     ws.onmessage = event => {
       try {
         const incomingMessage = JSON.parse(event.data)
@@ -46,7 +41,7 @@ export const useChatWebSocket = (
           }
 
           addMessageToCache({
-            id: +crypto.randomUUID(),
+            id: crypto.randomUUID(),
             body: incomingMessage.body,
             userId: Number(userId),
           })
@@ -82,7 +77,7 @@ export const useChatWebSocket = (
       if (!text.trim() || !currentUserId) return
 
       const messagePayload = {
-        id: +crypto.randomUUID(),
+        id: crypto.randomUUID(),
         body: text.trim(),
         userId: currentUserId,
         chatId: userId,
@@ -99,5 +94,5 @@ export const useChatWebSocket = (
     [userId, currentUserId, addMessageToCache],
   )
 
-  return { sendMessage, isReady }
+  return { sendMessage }
 }

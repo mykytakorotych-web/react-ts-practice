@@ -1,6 +1,10 @@
-import axios from "axios"
+import axios, { type InternalAxiosRequestConfig } from "axios"
 import Cookies from "js-cookie"
 import { router } from "../main"
+
+interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+  _isRetry?: boolean
+}
 
 export const apiClient = axios.create({
   baseURL: "https://dummyjson.com",
@@ -20,7 +24,7 @@ let refreshTokenPromise: Promise<string> | null = null
 apiClient.interceptors.response.use(
   response => response,
   async error => {
-    const originalRequest = error.config
+    const originalRequest: CustomAxiosRequestConfig = error.config
 
     if (error.response?.status === 401 && !originalRequest._isRetry) {
       originalRequest._isRetry = true

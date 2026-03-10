@@ -9,12 +9,14 @@ export function SideBar() {
 
   return (
     <aside className="relative w-full sm:max-w-xs bg-window-background flex flex-col pt-4 border-r-2 border-secondary-foreground/20">
-      {activePage === "profile" ? (
-        <SideBarProfilePage />
-      ) : (
+      {activePage === "profile" && <SideBarProfilePage />}
+
+      {activePage !== "profile" && (
         <>
           <SideBarTopSection />
-          {activePage === "chats" ? <SideBarChatPage /> : <SideBarSearchPage />}
+
+          {activePage === "chats" && <SideBarChatPage />}
+          {activePage === "search" && <SideBarSearchPage />}
         </>
       )}
     </aside>
